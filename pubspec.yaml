@@ -12,6 +12,8 @@ dependencies:
   csv: ^5.0.0
   excel: ^2.0.7
   args:
+executables:
+  string_extractor: bin/string_extractor.dart
 dev_dependencies:
   flutter_test:
     sdk: flutter

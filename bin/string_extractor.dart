@@ -1,45 +1,32 @@
-#!/usr/bin/env dart
-
-import 'dart:io';
-
 import 'package:args/args.dart';
-import 'package:string_extractor/core/string_extractor.dart';
+import 'package:string_extractor/string_extractor.dart';
 
 void main(List<String> arguments) {
   final parser = ArgParser()
     ..addOption('sourceDir',
-        abbr: 's', help: 'Source directory to scan for strings')
+        abbr: 's',
+        help: 'The source directory to scan for strings',
+        mandatory: true)
     ..addOption('outputFile',
-        abbr: 'o', help: 'Output file path for the extracted strings')
+        abbr: 'o',
+        help: 'The output file path for the extracted strings',
+        mandatory: true)
     ..addFlag('onlyLocalized',
-        abbr: 'l', defaultsTo: false, help: 'Extract only localized strings')
+        abbr: 'l', help: 'Extract only localized strings', defaultsTo: false)
     ..addOption('defaultLanguage',
         abbr: 'd',
-        defaultsTo: 'en_US',
-        help: 'Default language for the localization files')
+        help: 'The default language for the localization files',
+        defaultsTo: 'en_US')
     ..addMultiOption('locales',
-        abbr: 't', help: 'Other locales to generate files for');
+        abbr: 'L', help: 'Other locales to generate files for', defaultsTo: []);
 
-  final results = parser.parse(arguments);
-
-  if (!results.wasParsed('sourceDir') || !results.wasParsed('outputFile')) {
-    print(
-        'Usage: dart bin/string_extractor.dart --sourceDir <source directory> --outputFile <output file path> [options]');
-    print(parser.usage);
-    exit(1);
-  }
-
-  final sourceDir = results['sourceDir'] as String;
-  final outputFilePath = results['outputFile'] as String;
-  final onlyLocalized = results['onlyLocalized'] as bool;
-  final defaultLanguage = results['defaultLanguage'] as String;
-  final otherLocales = results['locales'] as List<String>;
+  final argResults = parser.parse(arguments);
 
   StringExtractor.extractStrings(
-    sourceDir,
-    outputFilePath,
-    onlyLocalized: onlyLocalized,
-    defaultLanguage: defaultLanguage,
-    otherLocales: otherLocales,
+    argResults['sourceDir'],
+    argResults['outputFile'],
+    onlyLocalized: argResults['onlyLocalized'],
+    defaultLanguage: argResults['defaultLanguage'],
+    otherLocales: argResults['locales'],
   );
 }
