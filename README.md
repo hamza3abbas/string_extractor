@@ -1,20 +1,19 @@
 # StringExtractor
 
-**NOTE: This tool is specifically for to extract static strings and categorise them. Feel free to edit as needed.**
+**NOTE: This tool is specifically for extracting static strings and categorizing them. Feel free to edit as needed.**
 
 ## Overview
 `StringExtractor` is a Dart class designed to extract and categorize strings from Dart files. It processes strings found in `.dart` files within a specified directory, categorizes them, and generates JSON, CSV, and Excel files with the extracted strings. The class can also generate localization files for different locales.
 
-## Usage
-To use the `StringExtractor` class, call the `extractStrings` method with the source directory and output file path:
+## CLI Usage
+To use the `StringExtractor` class from the CLI, use the following command:
 
-```dart
-void main() {
-  StringExtractor.extractStrings(
-    'path/to/source/directory',
-    'path/to/output/file',
-    onlyLocalized: false,
-    defaultLanguage: 'en_US',
-    otherLocales: ['es_ES', 'fr_FR'],
-  );
-}
+```sh
+string_extractor --sourceDir ./lib --outputFile ./ --defaultLanguage en_US --locales ar_SA
+Description of keys:
+--sourceDir: Specifies the source directory where .dart files are located. (e.g., ./lib)
+--outputFile: Specifies the output file path where the extracted strings will be saved. (e.g., ./)
+--defaultLanguage: Sets the default language for the localization files. (e.g., en_US)
+--locales: Specifies other locales for which localization files should be generated. (e.g., ar_SA)
+
+
