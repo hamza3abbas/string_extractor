@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:string_extractor/string_extractor.dart';
+import 'package:string_extractor/core/string_extractor.dart';
 
 void main(List<String> arguments) {
   final parser = ArgParser()
